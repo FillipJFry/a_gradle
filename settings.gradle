@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'a_gradle'
-include('app')
+include('myname')

@@ -11,8 +11,15 @@ plugins {
     id 'application'
 }
 
+/*java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}*/
+
 repositories {
     // Use Maven Central for resolving dependencies.
+    mavenLocal()
     mavenCentral()
 }
 
@@ -21,7 +28,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
 
     // This dependency is used by the application.
-    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'com.google.code.gson:gson:2.10.1'
 }
 
 application {
@@ -32,4 +39,11 @@ application {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.goit.fry.App'
+    }
+    from configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
 }
